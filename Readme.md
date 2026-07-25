@@ -155,7 +155,7 @@ Customer-Churn-Prediction/
 │   ├── 01_Exploratory_Data_Analysis.ipynb
 │   ├── 02_Feature_Engineering_and_Model_Development.ipynb
 │   └── 03_Model_Evaluation_and_Business_Insights.ipynb
-│├── src/
+│── src/
 │   ├── __init__.py
 │   ├── config.py
 │   ├── data_loader.py
