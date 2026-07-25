@@ -149,18 +149,24 @@ Customer-Churn-Prediction/
 │   └── shap_summary.png
 │
 ├── models/
-│   ├── logistic_regression_pipeline.pkl
-│   ├── random_forest_pipeline.pkl
-│   ├── xgboost_pipeline.pkl
-│   └── catboost_pipeline.pkl
+│   ├── best_model.joblib
 │
 ├── notebooks/
 │   ├── 01_Exploratory_Data_Analysis.ipynb
 │   ├── 02_Feature_Engineering_and_Model_Development.ipynb
 │   └── 03_Model_Evaluation_and_Business_Insights.ipynb
+│├── src/
+│   ├── __init__.py
+│   ├── config.py
+│   ├── data_loader.py
+│   ├── feature_engineering.py
+│   ├── preprocessing.py
+│   ├── model_training.py
+│   ├── evaluation.py
+│   ├── decision_threshold.py
+│   └── model_io.py
 │
-├── src/
-│
+├── train.py
 ├── README.md
 └── requirements.txt
 
