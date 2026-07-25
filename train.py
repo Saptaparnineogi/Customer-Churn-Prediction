@@ -21,7 +21,10 @@ from src.evaluation import (
     print_results,
 )
 from src.model_io import save_model
-from src.decision_threshold import evaluate_thresholds
+from src.decision_threshold import (
+    evaluate_thresholds,
+    find_best_threshold,
+)
 
 
 def prepare_target(df):
@@ -119,12 +122,32 @@ def main() -> None:
     best_model_result = results[best_model_name]
 
     threshold_results = evaluate_thresholds(
-    y_true=y_test,
-    y_prob=best_model_result["y_prob"],
+        y_true=y_test,
+        y_prob=best_model_result["y_prob"],
     )
-
-    print(threshold_results.head())
-    print(threshold_results.tail())
+    
+    best_threshold_result = find_best_threshold(
+        threshold_results=threshold_results,
+        metric="F1",
+    )
+    
+    print("\nThreshold optimization results:")
+    print(
+        f"Best threshold: "
+        f"{best_threshold_result['Threshold']:.2f}"
+    )
+    print(
+        f"Precision: "
+        f"{best_threshold_result['Precision']:.4f}"
+    )
+    print(
+        f"Recall: "
+        f"{best_threshold_result['Recall']:.4f}"
+    )
+    print(
+        f"F1 score: "
+        f"{best_threshold_result['F1']:.4f}"
+    )
 
 
 if __name__ == "__main__":
