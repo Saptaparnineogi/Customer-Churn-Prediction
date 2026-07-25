@@ -80,7 +80,20 @@ The objective is not only to predict churn accurately but also to demonstrate ho
 | CatBoost            | **0.8020** | **0.6578** | 0.5294 | 0.5867 | 0.8432 | **0.6565** |
 | XGBoost             | 0.8006   | 0.6545    | 0.5267 | 0.5837 | 0.8410 | 0.6514 |
 
->**Selected model: Random Forest, chosen because it achieved the strongest balance between precision, recall and F1-score for customer retention.**
+>**Selected model: Random Forest, chosen because it achieved the highest F1 score and strong recall, which better supports identifying customers at risk of churn.**
+
+## Decision Threshold Optimization
+
+Most classification models use a default probability threshold of **0.50** to convert predicted probabilities into class labels. However, this threshold is often arbitrary and may not provide the best trade-off between identifying churners (recall) and avoiding unnecessary retention actions (precision).
+
+To improve business performance, the decision threshold was evaluated across a range of values using the F1 score as the optimization criterion.
+
+| Threshold | Precision | Recall | F1 Score |
+|----------:|----------:|-------:|---------:|
+| 0.50 | 0.5287 | **0.7888** | 0.6330 |
+| **0.54** | **0.5538** | 0.7567 | **0.6395** |
+
+The optimized threshold of **0.54** increased the F1 score by improving precision while maintaining a high recall, resulting in a better balance between detecting customers likely to churn and limiting unnecessary retention interventions.
 
 ## 📈 Key Results & Visualizations
 
