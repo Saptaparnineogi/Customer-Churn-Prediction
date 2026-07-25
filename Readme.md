@@ -84,16 +84,17 @@ The objective is not only to predict churn accurately but also to demonstrate ho
 
 ## Decision Threshold Optimization
 
-Most classification models use a default probability threshold of **0.50** to convert predicted probabilities into class labels. However, this threshold is often arbitrary and may not provide the best trade-off between identifying churners (recall) and avoiding unnecessary retention actions (precision).
+![Decision Threshold Optimization](figures/threshold_optimisation.png)
 
-To improve business performance, the decision threshold was evaluated across a range of values using the F1 score as the optimization criterion.
+The default classification threshold of **0.50** was compared with alternative thresholds using precision, recall and F1-score. A threshold of **0.54** produced the strongest F1-score, improving the balance between identifying customers likely to churn and avoiding unnecessary retention interventions.
 
-| Threshold | Precision | Recall | F1 Score |
-|----------:|----------:|-------:|---------:|
-| 0.50 | 0.5287 | **0.7888** | 0.6330 |
-| **0.54** | **0.5538** | 0.7567 | **0.6395** |
+At the selected threshold:
 
-The optimized threshold of **0.54** increased the F1 score by improving precision while maintaining a high recall, resulting in a better balance between detecting customers likely to churn and limiting unnecessary retention interventions.
+- **Precision:** 0.554
+- **Recall:** 0.757
+- **F1-score:** 0.640
+
+This threshold was therefore used to convert predicted churn probabilities into customer classifications for the subsequent risk-segmentation and business analysis.
 
 ## 📈 Key Results & Visualizations
 
