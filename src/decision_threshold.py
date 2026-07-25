@@ -74,3 +74,47 @@ def evaluate_thresholds(
         )
 
     return pd.DataFrame(results)
+
+
+def find_best_threshold(
+    threshold_results: pd.DataFrame,
+    metric: str = "F1",
+) -> pd.Series:
+    """
+    Return the threshold row with the highest selected metric.
+
+    Parameters
+    ----------
+    threshold_results
+        DataFrame returned by `evaluate_thresholds`.
+
+    metric
+        Metric to maximize. Supported values are:
+        "Precision", "Recall", and "F1".
+
+    Returns
+    -------
+    pandas.Series
+        Row containing the best threshold and its metrics.
+    """
+
+    supported_metrics = {
+        "Precision",
+        "Recall",
+        "F1",
+    }
+
+    if metric not in supported_metrics:
+        raise ValueError(
+            f"Unsupported metric '{metric}'. "
+            f"Choose from {sorted(supported_metrics)}."
+        )
+
+    if threshold_results.empty:
+        raise ValueError(
+            "threshold_results cannot be empty."
+        )
+
+    best_index = threshold_results[metric].idxmax()
+
+    return threshold_results.loc[best_index]
