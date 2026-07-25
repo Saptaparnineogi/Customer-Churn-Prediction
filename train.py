@@ -21,7 +21,7 @@ from src.evaluation import (
     print_results,
 )
 from src.model_io import save_model
-from src.decision_threshold import find_best_threshold
+from src.decision_threshold import evaluate_thresholds
 
 
 def prepare_target(df):
@@ -118,36 +118,13 @@ def main() -> None:
     print(f"Saved {best_model_name}")
     best_model_result = results[best_model_name]
 
-    threshold_result = find_best_threshold(
-        y_true=y_test,
-        y_prob=best_model_result["y_prob"],
-        metric="f1",
+    threshold_results = evaluate_thresholds(
+    y_true=y_test,
+    y_prob=best_model_result["y_prob"],
     )
 
-    print("\nThreshold optimization results:")
-    print(
-        f"Best threshold: "
-        f"{threshold_result['best_threshold']:.2f}"
-    )
-    print(
-        f"Precision: "
-        f"{threshold_result['precision']:.4f}"
-    )
-    print(
-        f"Recall: "
-        f"{threshold_result['recall']:.4f}"
-    )
-    print(
-        f"F1 score: "
-        f"{threshold_result['f1']:.4f}"
-    )
-    print(
-        "Confusion matrix values: "
-        f"TN={threshold_result['true_negatives']}, "
-        f"FP={threshold_result['false_positives']}, "
-        f"FN={threshold_result['false_negatives']}, "
-        f"TP={threshold_result['true_positives']}"
-    )
+    print(threshold_results.head())
+    print(threshold_results.tail())
 
 
 if __name__ == "__main__":
