@@ -71,12 +71,14 @@ The objective is not only to predict churn accurately but also to demonstrate ho
 
 ## Model Performance
 
-| Model               |  Accuracy | Precision |    Recall |        F1 |   ROC-AUC |
-| ------------------- | --------: | --------: | --------: | --------: | --------: |
-| Logistic Regression |     0.732 |     0.497 |     0.781 |     0.609 |     0.842 |
-| Random Forest       |     0.761 |     0.534 |   **0.786**| **0.636** | **0.845** |
-| XGBoost             |     0.800 |     0.652 |     0.527 |     0.583 |     0.842 |
-| CatBoost            | **0.805** | **0.663** |     0.521 |     0.584 |   **0.845** |
+## Model Performance
+
+| Model               | Accuracy | Precision | Recall | F1 Score | ROC-AUC | PR-AUC |
+|---------------------|---------:|----------:|-------:|---------:|--------:|-------:|
+| Random Forest       | 0.7573   | 0.5287    | **0.7888** | **0.6330** | **0.8445** | 0.6521 |
+| Logistic Regression | 0.7317   | 0.4966    | 0.7861 | 0.6087 | 0.8420 | 0.6357 |
+| CatBoost            | **0.8020** | **0.6578** | 0.5294 | 0.5867 | 0.8432 | **0.6565** |
+| XGBoost             | 0.8006   | 0.6545    | 0.5267 | 0.5837 | 0.8410 | 0.6514 |
 
 >**Selected model: Random Forest, chosen because it achieved the strongest balance between precision, recall and F1-score for customer retention.**
 
