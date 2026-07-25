@@ -17,9 +17,9 @@ This project develops an end-to-end machine learning pipeline to predict custome
 Highlights include:
 
 - Built and benchmarked four machine learning models
-- Selected Random Forest based on business-oriented evaluation
-- Created probability-based customer risk segmentation
-- Simulated business impact for retention campaigns
+- Developed a modular end-to-end machine learning pipeline
+- Optimized the decision threshold for business-oriented classification
+- Demonstrated customer risk segmentation and retention analytics
 - Applied SHAP explainability to interpret model predictions
 
 The project demonstrates the complete lifecycle of a production-oriented data science solution, from exploratory analysis to business decision support.
@@ -218,10 +218,8 @@ pip install -r requirements.txt
 
 ### How to Run
 
-Launch Jupyter Notebook:
-
 ```bash
-jupyter notebook
+python train.py
 
 ```
 
