@@ -5,7 +5,8 @@ Utilities for saving and loading trained models.
 from __future__ import annotations
 
 from pathlib import Path
-
+import json
+from typing import Any
 import joblib
 from sklearn.base import BaseEstimator
 
@@ -64,3 +65,36 @@ def load_model(
         )
 
     return joblib.load(model_path)
+
+def save_metadata(
+    metadata: dict[str, Any],
+    metadata_path: str | Path,
+) -> None:
+    """
+    Save model metadata as a JSON file.
+
+    Parameters
+    ----------
+    metadata:
+        Dictionary containing model metadata.
+
+    metadata_path:
+        Destination path.
+    """
+
+    metadata_path = Path(metadata_path)
+
+    metadata_path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    with metadata_path.open(
+        "w",
+        encoding="utf-8",
+    ) as file:
+        json.dump(
+            metadata,
+            file,
+            indent=4,
+        )
