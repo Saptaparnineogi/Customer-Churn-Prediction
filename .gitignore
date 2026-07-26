@@ -15,6 +15,7 @@ ENV/
 
 # Jupyter
 .ipynb_checkpoints/
+notebooks/*.tsv
 
 # Pytest
 .pytest_cache/
