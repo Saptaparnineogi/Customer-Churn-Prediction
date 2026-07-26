@@ -17,7 +17,7 @@ def get_feature_types(X: pd.DataFrame):
     """
 
     categorical_features = (
-        X.select_dtypes(include=["object", "category"])
+        X.select_dtypes(include=["object", "category", "string"])
         .columns
         .tolist()
     )
