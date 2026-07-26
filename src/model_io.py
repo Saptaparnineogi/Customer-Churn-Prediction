@@ -66,7 +66,7 @@ def load_model(
 
     return joblib.load(model_path)
 
-def save_metadata(
+def save_model_metadata(
     metadata: dict[str, Any],
     metadata_path: str | Path,
 ) -> None:
