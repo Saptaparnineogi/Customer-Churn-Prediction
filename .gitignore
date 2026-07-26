@@ -15,12 +15,23 @@ ENV/
 
 # Jupyter
 .ipynb_checkpoints/
-notebooks/*.tsv
+
+# Data files
+*.tsv
+*.csv
+
+# Dataset
+data/
 
 # Pytest
 .pytest_cache/
 .coverage
 htmlcov/
+
+
+# CatBoost
+catboost_info/
+
 
 # Build
 build/
