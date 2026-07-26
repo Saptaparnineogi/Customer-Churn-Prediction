@@ -61,7 +61,7 @@ def main() -> None:
         columns_to_drop.append(CUSTOMER_ID_COLUMN)
 
     X = df.drop(columns=columns_to_drop)
-    
+
     # 4. Create stratified train-test split
     X_train, X_test, y_train, y_test = train_test_split(
         X,
@@ -75,15 +75,9 @@ def main() -> None:
 
     # 6. Build preprocessing pipeline
     preprocessor = build_preprocessor(
-        numerical_features=numerical_features,
-        categorical_features=categorical_features
+        numerical_features=numerical_features, categorical_features=categorical_features
     )
 
-    X_train_transformed = preprocessor.fit_transform(X_train)
-    X_test_transformed = preprocessor.transform(X_test)
-
-    print(f"Transformed train shape: {X_train_transformed.shape}")
-    print(f"Transformed test shape: {X_test_transformed.shape}")
     # 7. Define and train models
     models = get_models(random_state=RANDOM_STATE)
 
@@ -99,23 +93,16 @@ def main() -> None:
     print(f"Test samples: {len(X_test)}")
     print(f"Models trained: {', '.join(trained_models.keys())}")
 
-    results = evaluate_models(
-    trained_models,
-    X_test,
-    y_test,
-)
+    results = evaluate_models(trained_models, X_test, y_test)
 
     results_df = results_to_dataframe(results)
-    results_df = results_df.sort_values(
-    by=MODEL_SELECTION_METRIC,
-    ascending=False,
-    )
+    results_df = results_df.sort_values(by=MODEL_SELECTION_METRIC, ascending=False)
     print_results(results_df)
     best_model_name = results_df.iloc[0]["Model"]
 
     save_model(
-    trained_models[best_model_name],
-    MODEL_DIR / "best_model.joblib",
+        trained_models[best_model_name],
+        MODEL_DIR / "best_model.joblib",
     )
 
     print(f"Saved {best_model_name}")
@@ -125,29 +112,17 @@ def main() -> None:
         y_true=y_test,
         y_prob=best_model_result["y_prob"],
     )
-    
+
     best_threshold_result = find_best_threshold(
         threshold_results=threshold_results,
         metric="F1",
     )
-    
+
     print("\nThreshold optimization results:")
-    print(
-        f"Best threshold: "
-        f"{best_threshold_result['Threshold']:.2f}"
-    )
-    print(
-        f"Precision: "
-        f"{best_threshold_result['Precision']:.4f}"
-    )
-    print(
-        f"Recall: "
-        f"{best_threshold_result['Recall']:.4f}"
-    )
-    print(
-        f"F1 score: "
-        f"{best_threshold_result['F1']:.4f}"
-    )
+    print(f"Best threshold: {best_threshold_result['Threshold']:.2f}")
+    print(f"Precision: {best_threshold_result['Precision']:.4f}")
+    print(f"Recall: {best_threshold_result['Recall']:.4f}")
+    print(f"F1 score: {best_threshold_result['F1']:.4f}")
 
 
 if __name__ == "__main__":
