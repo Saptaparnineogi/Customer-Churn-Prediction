@@ -20,7 +20,10 @@ from src.evaluation import (
     results_to_dataframe,
     print_results,
 )
-from src.model_io import save_model
+from src.model_io import (
+    save_model_metadata,
+    save_model,
+)
 from src.decision_threshold import (
     evaluate_thresholds,
     find_best_threshold,
@@ -118,11 +121,19 @@ def main() -> None:
         metric="F1",
     )
 
-    print("\nThreshold optimization results:")
-    print(f"Best threshold: {best_threshold_result['Threshold']:.2f}")
-    print(f"Precision: {best_threshold_result['Precision']:.4f}")
-    print(f"Recall: {best_threshold_result['Recall']:.4f}")
-    print(f"F1 score: {best_threshold_result['F1']:.4f}")
+    model_metadata = {
+        "model_name": best_model_name,
+        "selection_metric": MODEL_SELECTION_METRIC,
+        "decision_threshold": float(best_threshold_result["Threshold"]),
+        "precision": float(best_threshold_result["Precision"]),
+        "recall": float(best_threshold_result["Recall"]),
+        "f1_score": float(best_threshold_result["F1"]),
+    }
+
+    save_model_metadata(
+        metadata=model_metadata,
+        metadata_path=MODEL_DIR / "model_metadata.json",
+    )
 
 
 if __name__ == "__main__":
