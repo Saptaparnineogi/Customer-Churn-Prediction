@@ -3,26 +3,27 @@ An end-to-end machine learning project that predicts customer churn and demonstr
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![Machine Learning](https://img.shields.io/badge/Machine%20Learning-End--to--End-blueviolet)
-![SHAP](https://img.shields.io/badge/Explainability-SHAP-red)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
 
 ![Churn by Contract](figures/workflow.png)
-
+>The figure below summarizes the end-to-end machine learning workflow implemented in this project.
 
 ## Executive Summary
 
-This project develops an end-to-end machine learning pipeline to predict customer churn and transform predictions into actionable business decisions.
+The project demonstrates the complete lifecycle of a production-style machine learning solution, from exploratory analysis and model development to automated inference on new customer data and business decision support.
 
 Highlights include:
 
-- Built and benchmarked four machine learning models
-- Developed a modular end-to-end machine learning pipeline
+- Built an end-to-end production-style machine learning pipeline
+- Benchmarked four classification algorithms
+- Automated preprocessing using sklearn Pipelines
 - Optimized the decision threshold for business-oriented classification
-- Demonstrated customer risk segmentation and retention analytics
-- Applied SHAP explainability to interpret model predictions
+- Persisted trained models and metadata for reproducible inference
+- Developed a standalone prediction pipeline for new customer data
+- Added unit tests and GitHub Actions CI
 
-The project demonstrates the complete lifecycle of a production-oriented data science solution, from exploratory analysis to business decision support.
+The project demonstrates the complete lifecycle of a production-style machine learning solution, from exploratory analysis to automated inference on new customer data., from exploratory analysis to business decision support.
 
 ## Project Overview
 
@@ -33,7 +34,6 @@ This project develops an end-to-end machine learning pipeline to predict custome
 - Business-driven feature engineering
 - Model benchmarking
 - Threshold optimisation
-- Customer risk segmentation
 - Business impact simulation
 - SHAP explainability
 
@@ -50,9 +50,9 @@ The objective is not only to predict churn accurately but also to demonstrate ho
   - CatBoost
 - Model Benchmarking
 - Threshold Optimisation
-- Customer Risk Segmentation
 - Business Impact Simulation
 - SHAP Explainability
+- Batch Prediction Pipeline
 
 ## Technologies
 
@@ -71,7 +71,6 @@ The objective is not only to predict churn accurately but also to demonstrate ho
 
 ## Model Performance
 
-## Model Performance
 
 | Model               | Accuracy | Precision | Recall | F1 Score | ROC-AUC | PR-AUC |
 |---------------------|---------:|----------:|-------:|---------:|--------:|-------:|
@@ -133,11 +132,15 @@ The analysis demonstrates how churn predictions can support customer retention s
 - Explainable prediction using SHAP
 - Data-driven retention decision making
 
+
 ## Repository Structure
 
 ```text
 Customer-Churn-Prediction/
 │
+├──.github/
+|   └── workflows/
+      └── tests.yml
 ├── data/
 │   ├── raw/
 │   └── processed/
@@ -167,7 +170,13 @@ Customer-Churn-Prediction/
 │   ├── decision_threshold.py
 │   └── model_io.py
 │
+├── tests/
+|   ├── test_decision_threshold.py
+|   ├── test_model_io.py
+|   └── test_preprocessing.py
+|
 ├── train.py
+├── predict.py
 ├── README.md
 └── requirements.txt
 
@@ -223,12 +232,51 @@ conda activate churn-prediction
 pip install -r requirements.txt
 ````
 
-### How to Run
+### ## Model Training
 
 ```bash
 python train.py
 
 ```
+## Making Predictions
+
+Generate churn predictions for new customer data using the trained model.
+
+```bash
+python predict.py \
+    --input data/new_customers.csv \
+    --output outputs/predictions.csv
+```
+
+The prediction pipeline automatically:
+
+- loads the trained model and preprocessing pipeline
+- applies the same feature engineering used during training
+- generates churn probabilities
+- applies the optimized decision threshold
+- exports predictions to a CSV file
+
+Example output:
+
+| customerID | churn_probability | predicted_churn |
+|------------|------------------:|----------------:|
+
+
+## Testing
+
+Run all unit tests:
+
+```bash
+pytest
+```
+
+The project includes automated tests for:
+
+- preprocessing
+- decision threshold optimization
+- model persistence
+
+Continuous integration is configured using GitHub Actions, ensuring that tests are executed automatically on every push.
 
 ## Limitations
 
