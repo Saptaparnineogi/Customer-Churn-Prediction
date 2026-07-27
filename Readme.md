@@ -7,7 +7,7 @@ An end-to-end machine learning project that predicts customer churn and demonstr
 
 
 ![Churn by Contract](figures/workflow.png)
->The figure below summarizes the end-to-end machine learning workflow implemented in this project.
+>The figure above summarizes the end-to-end machine learning workflow implemented in this project.
 
 ## Executive Summary
 
