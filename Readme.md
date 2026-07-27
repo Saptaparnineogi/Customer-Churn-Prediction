@@ -232,7 +232,7 @@ conda activate churn-prediction
 pip install -r requirements.txt
 ````
 
-### ## Model Training
+## Model Training
 
 ```bash
 python train.py
@@ -240,7 +240,7 @@ python train.py
 ```
 ## Making Predictions
 
-Generate churn predictions for new customer data using the trained model.
+Generate churn predictions for unseen customer data using the trained model.
 
 ```bash
 python predict.py \
@@ -261,6 +261,8 @@ Example output:
 | customerID | churn_probability | predicted_churn |
 |------------|------------------:|----------------:|
 
+
+>The exported CSV can be used directly for downstream business analysis, retention campaigns, or integration into reporting workflows.
 
 ## Testing
 
