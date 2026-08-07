@@ -1,4 +1,4 @@
-# Customer Churn Risk Prediction & Retention Analytics
+# Customer Churn Risk Prediction with Model Explanability
 An end-to-end machine learning project that predicts customer churn and demonstrates how predictive analytics can support business-driven retention strategies.
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
