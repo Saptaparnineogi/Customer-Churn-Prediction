@@ -270,12 +270,15 @@ def save_predictions(
 
 def main() -> None:
     """Run the complete prediction workflow."""
-
+    print("==================================================")
+    print("Customer Churn Prediction")
+    print("==================================================")
     args = parse_arguments()
 
     df = load_data(args.input)
-
+    print(f"Loaded {len(df)} customer records from {args.input}")
     model = load_model(args.model)
+    print("Model Loaded successfully.")
     metadata = load_model_metadata(args.metadata)
 
     threshold = get_decision_threshold(metadata)
@@ -303,6 +306,7 @@ def main() -> None:
     print(f"Decision threshold: {threshold:.2f}")
     print(f"Predicted churners: {output['predicted_churn'].sum()}")
     print(f"Predictions saved to: {args.output}")
+    print("Prediction completed successfully.")
 
 
 if __name__ == "__main__":
