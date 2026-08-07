@@ -1,13 +1,12 @@
 """
 Utilities for saving and loading trained models.
 """
-
 from __future__ import annotations
+import json
+import joblib
 
 from pathlib import Path
-import json
 from typing import Any
-import joblib
 from sklearn.base import BaseEstimator
 
 
@@ -60,11 +59,10 @@ def load_model(
     model_path = Path(model_path)
 
     if not model_path.exists():
-        raise FileNotFoundError(
-            f"Model not found: {model_path}"
-        )
+        raise FileNotFoundError(f"Model not found: {model_path}")
 
     return joblib.load(model_path)
+
 
 def save_model_metadata(
     metadata: dict[str, Any],
@@ -98,3 +96,32 @@ def save_model_metadata(
             file,
             indent=4,
         )
+
+
+def load_model_metadata(
+    metadata_path: str | Path,
+) -> dict[str, Any]:
+    """
+    Load model metadata from a JSON file.
+
+    Parameters
+    ----------
+    metadata_path:
+        Path to metadata JSON.
+
+    Returns
+    -------
+    dict
+        Model metadata.
+    """
+
+    metadata_path = Path(metadata_path)
+
+    if not metadata_path.exists():
+        raise FileNotFoundError(f"Metadata file not found: {metadata_path}")
+
+    with metadata_path.open(
+        "r",
+        encoding="utf-8",
+    ) as file:
+        return json.load(file)
